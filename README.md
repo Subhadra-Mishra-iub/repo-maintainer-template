@@ -89,6 +89,8 @@ pytest --cov=src
 
 ## Web Application
 
+🌐 **Live Demo**: The web application is running at [https://subhadra-mishra-iub.github.io/repo-maintainer-template/](https://subhadra-mishra-iub.github.io/repo-maintainer-template/)
+
 ### Local Development
 
 1. Open `web/index.html` in your web browser

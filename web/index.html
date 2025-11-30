@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Adder - repo-maintainer-template</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
 <body>
     <div class="container">
@@ -14,27 +15,67 @@
         </header>
         
         <main>
-            <div class="calculator">
-                <div class="input-group">
-                    <label for="num1">First Number:</label>
-                    <input type="number" id="num1" placeholder="Enter a number" step="any">
+            <!-- JavaScript Calculator Section -->
+            <section class="section">
+                <h2>JavaScript Calculator</h2>
+                <div class="calculator">
+                    <div class="input-group">
+                        <label for="num1">First Number:</label>
+                        <input type="number" id="num1" placeholder="Enter a number" step="any">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="num2">Second Number:</label>
+                        <input type="number" id="num2" placeholder="Enter a number" step="any">
+                    </div>
+                    
+                    <button id="calculateBtn" onclick="calculateSum()">Add Numbers</button>
+                    
+                    <div class="result-container">
+                        <div id="result" class="result"></div>
+                    </div>
                 </div>
-                
-                <div class="input-group">
-                    <label for="num2">Second Number:</label>
-                    <input type="number" id="num2" placeholder="Enter a number" step="any">
+            </section>
+
+            <!-- Python Function Testing Section -->
+            <section class="section">
+                <h2>Test Python Function (main.py)</h2>
+                <p class="section-description">Test the <code>add_numbers</code> function from <code>src/main.py</code></p>
+                <div class="python-tester">
+                    <div class="input-group">
+                        <label for="pyNum1">First Number (a):</label>
+                        <input type="number" id="pyNum1" placeholder="Enter a number" step="any" value="10">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pyNum2">Second Number (b):</label>
+                        <input type="number" id="pyNum2" placeholder="Enter a number" step="any" value="20">
+                    </div>
+                    
+                    <button id="testPythonBtn" onclick="testPythonFunction()" disabled>Test Python Function</button>
+                    <div id="pyodide-status" class="status-message">Loading Python runtime...</div>
+                    
+                    <div class="result-container">
+                        <div id="pythonResult" class="result"></div>
+                    </div>
                 </div>
-                
-                <button id="calculateBtn" onclick="calculateSum()">Add Numbers</button>
-                
-                <div class="result-container">
-                    <div id="result" class="result"></div>
+            </section>
+
+            <!-- Python Tests Section -->
+            <section class="section">
+                <h2>Run Python Tests (test_main.py)</h2>
+                <p class="section-description">Run the pytest test suite from <code>tests/test_main.py</code></p>
+                <div class="python-tester">
+                    <button id="runTestsBtn" onclick="runPythonTests()" disabled>Run All Tests</button>
+                    <div class="result-container">
+                        <div id="testResult" class="result"></div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </main>
         
         <footer>
-            <p>Part of <a href="https://github.com/subhadramishra/repo-maintainer-template" target="_blank">repo-maintainer-template</a></p>
+            <p>Part of <a href="https://github.com/Subhadra-Mishra-iub/repo-maintainer-template" target="_blank">repo-maintainer-template</a></p>
         </footer>
     </div>
     
