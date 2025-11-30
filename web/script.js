@@ -11,11 +11,23 @@ let pythonReady = false;
 /**
  * Initialize Pyodide Python runtime
  */
-async function loadPyodide() {
+async function initializePyodide() {
     const statusDiv = document.getElementById('pyodide-status');
     
     try {
         statusDiv.textContent = 'Loading Python runtime...';
+        
+        // Wait for Pyodide to be available
+        let retries = 0;
+        while (typeof loadPyodide === 'undefined' && retries < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            retries++;
+        }
+        
+        if (typeof loadPyodide === 'undefined') {
+            throw new Error('Pyodide library not loaded. Please check your internet connection and refresh the page.');
+        }
+        
         pyodide = await loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/" });
         
         // Define the Python function
@@ -307,6 +319,12 @@ document.addEventListener('DOMContentLoaded', function() {
     testResultDiv.textContent = 'Click "Run All Tests" to execute the test suite';
     testResultDiv.className = 'result empty';
     
-    // Load Pyodide
-    loadPyodide();
+    // Load Pyodide - wait for the script to be available
+    // Pyodide script is loaded in the HTML head, so wait for it
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializePyodide);
+    } else {
+        // DOM is already loaded, wait a bit for Pyodide script
+        setTimeout(initializePyodide, 100);
+    }
 });

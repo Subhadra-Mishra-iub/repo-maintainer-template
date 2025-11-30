@@ -89,16 +89,27 @@ pytest --cov=src
 
 ## Web Application
 
-🌐 **Live Demo**: The web application is running at [https://subhadra-mishra-iub.github.io/repo-maintainer-template/](https://subhadra-mishra-iub.github.io/repo-maintainer-template/)
+🌐 **Live Demo**: The web application is running at:
+- **Direct URL**: [https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html](https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html)
+- **Alternative**: [https://subhadra-mishra-iub.github.io/repo-maintainer-template/](https://subhadra-mishra-iub.github.io/repo-maintainer-template/) (if configured correctly)
+
+### Features
+
+The web application includes three interactive sections:
+
+1. **JavaScript Calculator** - Add two numbers using JavaScript
+2. **Test Python Function** - Test the `add_numbers` function from `src/main.py` directly in your browser
+3. **Run Python Tests** - Execute the full test suite from `tests/test_main.py` and see results
+
+> **Note**: The Python testing features use Pyodide to run Python code in your browser. The Python runtime will load automatically when you visit the page (may take 10-30 seconds on first load).
 
 ### Local Development
 
+**Option 1: Direct File Access**
 1. Open `web/index.html` in your web browser
-2. Enter two numbers in the input fields
-3. Click "Add Numbers" to see the result
+2. Note: Python features may not work with `file://` protocol - use Option 2 instead
 
-Alternatively, you can use a local server:
-
+**Option 2: Local Server (Recommended)**
 ```bash
 # Python 3
 cd web
@@ -107,17 +118,26 @@ python3 -m http.server 8000
 # Then open http://localhost:8000 in your browser
 ```
 
+This ensures all features work correctly, including Python testing.
+
 ### GitHub Pages Deployment
 
-1. Go to your repository on GitHub
+**Current Configuration:**
+1. Go to your repository on GitHub: [https://github.com/Subhadra-Mishra-iub/repo-maintainer-template](https://github.com/Subhadra-Mishra-iub/repo-maintainer-template)
 2. Navigate to **Settings** → **Pages**
 3. Under **Source**, select:
-   - **Branch**: `main` (or `master`)
+   - **Branch**: `main`
    - **Folder**: `/web`
 4. Click **Save**
-5. Your site will be available at: `https://<username>.github.io/repo-maintainer-template/`
 
-> **Note**: It may take a few minutes for the site to be available after the first deployment.
+**Accessing Your Site:**
+- After deployment, your site will be available at:
+  - `https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html`
+- If you want it at the root URL (`https://subhadra-mishra-iub.github.io/repo-maintainer-template/`), you can:
+  - Option A: Change GitHub Pages source to `/ (root)` and move `web/` contents to root
+  - Option B: Keep current setup and use the `/web/index.html` URL
+
+> **Note**: It may take 1-5 minutes for the site to be available after the first deployment or after pushing changes.
 
 ## Screenshots
 
