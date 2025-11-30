@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Adder - repo-maintainer-template</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Number Adder</h1>
+            <p class="description">A simple web application to add two numbers together</p>
+        </header>
+        
+        <main>
+            <div class="calculator">
+                <div class="input-group">
+                    <label for="num1">First Number:</label>
+                    <input type="number" id="num1" placeholder="Enter a number" step="any">
+                </div>
+                
+                <div class="input-group">
+                    <label for="num2">Second Number:</label>
+                    <input type="number" id="num2" placeholder="Enter a number" step="any">
+                </div>
+                
+                <button id="calculateBtn" onclick="calculateSum()">Add Numbers</button>
+                
+                <div class="result-container">
+                    <div id="result" class="result"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Part of <a href="https://github.com/subhadramishra/repo-maintainer-template" target="_blank">repo-maintainer-template</a></p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
