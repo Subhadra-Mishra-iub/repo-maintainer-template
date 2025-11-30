@@ -89,9 +89,9 @@ pytest --cov=src
 
 ## Web Application
 
-🌐 **Live Demo**: The web application is running at:
-- **Direct URL**: [https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html](https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html)
-- **Alternative**: [https://subhadra-mishra-iub.github.io/repo-maintainer-template/](https://subhadra-mishra-iub.github.io/repo-maintainer-template/) (if configured correctly)
+🌐 **Live Demo**: [https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html](https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html)
+
+Visit the link above to interact with the web application and test the Python code directly in your browser.
 
 ### Features
 
@@ -122,7 +122,8 @@ This ensures all features work correctly, including Python testing.
 
 ### GitHub Pages Deployment
 
-**Current Configuration:**
+To deploy this web application via GitHub Pages:
+
 1. Go to your repository on GitHub: [https://github.com/Subhadra-Mishra-iub/repo-maintainer-template](https://github.com/Subhadra-Mishra-iub/repo-maintainer-template)
 2. Navigate to **Settings** → **Pages**
 3. Under **Source**, select:
@@ -130,19 +131,9 @@ This ensures all features work correctly, including Python testing.
    - **Folder**: `/web`
 4. Click **Save**
 
-**Accessing Your Site:**
-- After deployment, your site will be available at:
-  - `https://subhadra-mishra-iub.github.io/repo-maintainer-template/web/index.html`
-- If you want it at the root URL (`https://subhadra-mishra-iub.github.io/repo-maintainer-template/`), you can:
-  - Option A: Change GitHub Pages source to `/ (root)` and move `web/` contents to root
-  - Option B: Keep current setup and use the `/web/index.html` URL
+Your site will be available at: `https://<username>.github.io/repo-maintainer-template/web/index.html`
 
 > **Note**: It may take 1-5 minutes for the site to be available after the first deployment or after pushing changes.
-
-## Screenshots
-
-<!-- Add screenshots of your web app here -->
-![Web Application Screenshot](screenshot.png)
 
 ## Future Improvements
 
