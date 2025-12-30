@@ -1,23 +1,12 @@
-/**
- * Number Adder Web Application
- * 
- * Handles user input, validates numbers, and displays the sum.
- * Includes Python testing capabilities using Pyodide.
- */
-
 let pyodide = null;
 let pythonReady = false;
 
-/**
- * Initialize Pyodide Python runtime
- */
 async function initializePyodide() {
     const statusDiv = document.getElementById('pyodide-status');
     
     try {
         statusDiv.textContent = 'Loading Python runtime...';
         
-        // Wait for Pyodide to be available
         let retries = 0;
         while (typeof loadPyodide === 'undefined' && retries < 50) {
             await new Promise(resolve => setTimeout(resolve, 100));
@@ -30,19 +19,8 @@ async function initializePyodide() {
         
         pyodide = await loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/" });
         
-        // Define the Python function
         const pythonCode = `
 def add_numbers(a, b):
-    """
-    Add two numbers and return the result.
-    
-    Args:
-        a: First number to add
-        b: Second number to add
-    
-    Returns:
-        The sum of a and b
-    """
     return a + b
 `;
         
@@ -52,7 +30,6 @@ def add_numbers(a, b):
         statusDiv.textContent = '✓ Python runtime ready!';
         statusDiv.className = 'status-message ready';
         
-        // Enable buttons
         document.getElementById('testPythonBtn').disabled = false;
         document.getElementById('runTestsBtn').disabled = false;
     } catch (error) {
@@ -62,20 +39,14 @@ def add_numbers(a, b):
     }
 }
 
-/**
- * Calculate the sum of two numbers from input fields and display the result.
- */
 function calculateSum() {
-    // Get input elements
     const num1Input = document.getElementById('num1');
     const num2Input = document.getElementById('num2');
     const resultDiv = document.getElementById('result');
     
-    // Get values and convert to numbers
     const num1Str = num1Input.value.trim();
     const num2Str = num2Input.value.trim();
     
-    // Validate inputs
     if (num1Str === '' || num2Str === '') {
         resultDiv.textContent = 'Please enter both numbers';
         resultDiv.className = 'result error';
@@ -85,24 +56,17 @@ function calculateSum() {
     const num1 = parseFloat(num1Str);
     const num2 = parseFloat(num2Str);
     
-    // Check if inputs are valid numbers
     if (isNaN(num1) || isNaN(num2)) {
         resultDiv.textContent = 'Please enter valid numbers';
         resultDiv.className = 'result error';
         return;
     }
     
-    // Calculate sum
     const sum = num1 + num2;
-    
-    // Display result
     resultDiv.textContent = `Result: ${sum}`;
     resultDiv.className = 'result';
 }
 
-/**
- * Test the Python add_numbers function
- */
 function testPythonFunction() {
     if (!pythonReady) {
         alert('Python runtime is not ready yet. Please wait...');
@@ -132,7 +96,6 @@ function testPythonFunction() {
     }
     
     try {
-        // Call the Python function
         const result = pyodide.runPython(`add_numbers(${num1}, ${num2})`);
         resultDiv.textContent = `Python Result: add_numbers(${num1}, ${num2}) = ${result}`;
         resultDiv.className = 'result success';
@@ -142,9 +105,6 @@ function testPythonFunction() {
     }
 }
 
-/**
- * Run Python tests
- */
 function runPythonTests() {
     if (!pythonReady) {
         alert('Python runtime is not ready yet. Please wait...');
@@ -155,12 +115,10 @@ function runPythonTests() {
     resultDiv.textContent = 'Running tests...';
     resultDiv.className = 'result';
     
-    // Test code that mimics test_main.py
     const testCode = `
 import sys
 from io import StringIO
 
-# Capture output
 old_stdout = sys.stdout
 sys.stdout = captured_output = StringIO()
 
@@ -169,7 +127,6 @@ test_passed = 0
 test_failed = 0
 
 try:
-    # Test 1: Positive numbers
     result1 = add_numbers(5, 3)
     if result1 == 8.0:
         test_results.append("✓ test_add_positive_numbers: PASSED (5 + 3 = 8.0)")
@@ -186,7 +143,6 @@ try:
         test_results.append(f"✗ test_add_positive_numbers: FAILED (expected 300.0, got {result2})")
         test_failed += 1
     
-    # Test 2: With zero
     result3 = add_numbers(0, 5)
     if result3 == 5.0:
         test_results.append("✓ test_add_with_zero (0 + 5): PASSED")
@@ -211,7 +167,6 @@ try:
         test_results.append(f"✗ test_add_with_zero: FAILED (expected 0.0, got {result5})")
         test_failed += 1
     
-    # Test 3: Negative numbers
     result6 = add_numbers(-5, -3)
     if result6 == -8.0:
         test_results.append("✓ test_add_negative_numbers (-5 + -3): PASSED")
@@ -236,7 +191,6 @@ try:
         test_results.append(f"✗ test_add_negative_numbers: FAILED (expected 5.0, got {result8})")
         test_failed += 1
     
-    # Test 4: Floats
     result9 = add_numbers(2.5, 3.7)
     if abs(result9 - 6.2) < 0.0001:
         test_results.append("✓ test_add_floats (2.5 + 3.7): PASSED")
@@ -253,7 +207,6 @@ try:
         test_results.append(f"✗ test_add_floats: FAILED (expected 0.3, got {result10})")
         test_failed += 1
     
-    # Summary
     summary = f"\\n{'='*50}\\nTest Summary:\\n{'='*50}\\n"
     summary += f"Total tests: {test_passed + test_failed}\\n"
     summary += f"Passed: {test_passed}\\n"
@@ -276,7 +229,6 @@ finally:
         resultDiv.textContent = output;
         resultDiv.className = 'result test-output';
         
-        // Check if all tests passed
         if (output.includes('Failed: 0')) {
             resultDiv.classList.add('success');
         }
@@ -286,14 +238,10 @@ finally:
     }
 }
 
-/**
- * Initialize the application
- */
 document.addEventListener('DOMContentLoaded', function() {
     const num1Input = document.getElementById('num1');
     const num2Input = document.getElementById('num2');
     
-    // Add event listeners for Enter key
     num1Input.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             calculateSum();
@@ -306,7 +254,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Initialize result displays
     const resultDiv = document.getElementById('result');
     resultDiv.textContent = 'Enter two numbers and click "Add Numbers"';
     resultDiv.className = 'result empty';
@@ -319,12 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
     testResultDiv.textContent = 'Click "Run All Tests" to execute the test suite';
     testResultDiv.className = 'result empty';
     
-    // Load Pyodide - wait for the script to be available
-    // Pyodide script is loaded in the HTML head, so wait for it
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initializePyodide);
     } else {
-        // DOM is already loaded, wait a bit for Pyodide script
         setTimeout(initializePyodide, 100);
     }
 });
